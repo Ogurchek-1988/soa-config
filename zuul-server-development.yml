@@ -22,8 +22,8 @@ eureka:
 zuul:
   routes:
     agency-service:
-      path: /agency-service/**
-      serviceId: agency-service
+      path: /zuul-server/**
+      serviceId: zuul-server
   ssl-hostname-validation-enabled: false
   okhttp:
     enabled: true
