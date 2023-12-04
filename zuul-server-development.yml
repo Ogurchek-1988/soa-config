@@ -1,0 +1,38 @@
+server:
+  port: 8762
+  ssl:
+    key-store: classpath:/home/osmi/itmo/soa/ssl/server.keystore
+    key-store-password: testtest
+    key-alias: localhost
+    key-password: testtest
+    enabled: true
+
+eureka:
+  instance:
+    hostname: localhost
+    non-secure-port-enabled: false
+    secure-port-enabled: true
+    secure-port: ${server.port}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+zuul:
+  routes:
+    agency-service:
+      path: /agency-service/**
+      serviceId: agency-service
+  ssl-hostname-validation-enabled: false
+  okhttp:
+    enabled: true
+  ignoredServices: '*'
+
+ribbon:
+  eureka:
+    enabled: true
+  OkToRetryOnAllOperations: true
+  CustomSSLSocketFactoryClassName: com.netflix.http4.ssl.AcceptAllSocketFactory
+  TrustStore: classpath:/home/osmi/itmo/soa/ssl/server.truststore
+  TrustStorePassword: password
